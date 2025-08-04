@@ -1,7 +1,7 @@
-# 任务设置
+# Task Settings
 task_name: 'classification'
 model_name: 'TSCMixer'
-# 模型配置
+# Model Configuration
 model:
   d: 128
   M: 2
@@ -10,8 +10,7 @@ model:
   patch_len: 32
   Dicp: 32
   N: 3
-
-# 训练配置
+# Training Configuration
 training:
   epochs: 200
   learning_rate: 0.0001
@@ -24,7 +23,7 @@ training:
   weight_decay: 0.0001
   use_gpu: True
   ckp_path: './checkpoints/ckpt_TSCMixer/'
-# 数据集
+# Dataset
 data:
   data_dir: './dataset/classification/UEA/Cricket'
   dwt_level: 1
