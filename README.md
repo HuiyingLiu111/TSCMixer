@@ -1,5 +1,5 @@
 # TSCMixer: A multi-view method for Multivariable Time Series Classification
-<img width="2514" height="1163" alt="architecture" src="https://github.com/user-attachments/assets/f81abf4c-b749-45cb-94ae-27252ea1b092" />
+<img width="2514" height="1163" alt="architecture" src="./architecture.png" />
 
 # Overview
 ## 1.Config file
