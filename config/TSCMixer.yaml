@@ -1,0 +1,31 @@
+# 任务设置
+task_name: 'classification'
+model_name: 'TSCMixer'
+# 模型配置
+model:
+  d: 128
+  M: 2
+  d_intermediate: 1
+  ssm_cfg: {'layer': 'Mamba1'}
+  patch_len: 32
+  Dicp: 32
+  N: 3
+
+# 训练配置
+training:
+  epochs: 200
+  learning_rate: 0.0001
+  batch_size: 64
+  patience: 50
+  optimizer: 'Adam'
+  criterion: 'CrossEntropyLoss'
+  warmup_steps_ratio: 0.1
+  lr_schedule: 'poly'
+  weight_decay: 0.0001
+  use_gpu: True
+  ckp_path: './checkpoints/ckpt_TSCMixer/'
+# 数据集
+data:
+  data_dir: './dataset/classification/UEA/Cricket'
+  dwt_level: 1
+  dwt_func: 'db4'
