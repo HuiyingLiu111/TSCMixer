@@ -1,4 +1,6 @@
 # TSCMixer: A multi-view method for Multivariable Time Series Classification
+<img width="2514" height="1163" alt="architecture" src="https://github.com/user-attachments/assets/f81abf4c-b749-45cb-94ae-27252ea1b092" />
+
 # Overview
 ## 1.Config file
 We have provided a config file at <kbd> ./config/TSCMixer.yaml</kbd>. This document consists of four parts: **Task Settings**, **Model Configuration**, **Training Configuration**, and **Dataset**.
@@ -6,7 +8,7 @@ We have provided a config file at <kbd> ./config/TSCMixer.yaml</kbd>. This docum
 - In the **Model Configuration**, the hyperparameters correspond one-to-one with those mentioned in the paper. Parameters <kbd>d_intermediate</kbd> and <kbd>ssm_cfg</kbd>, which are not mentioned in the paper, remain fixed in our experiments, they are included here only to reveal the key internal structure of the model.
 - The **Model Configuration** and **Training Configuration** parameters corresponding to the experimental results in the paper are shown in the table below.
 
-| Datasets   | epochs | batch size | learning rate | M   | N   | d    | $L_p$ | $D_{rep}$ |
+| Datasets   | epochs | batch size | learning rate | M   | N   | d    | $L_p$ | $D_{icp}$ |
 |:------------:|:--------:|:------------:|:---------------:|:-----:|:-----:|:------:|:-------:|:-----------:|
 | AWR        | 200    | 512        | 0.0001        | 2   | 6   | 128  | 32    | 32        |
 | BM         | 100    | 64         | 0.0001        | 2   | 3   | 64   | 32    | 32        |
@@ -29,13 +31,21 @@ We have provided a config file at <kbd> ./config/TSCMixer.yaml</kbd>. This docum
 We have provided 2 sample datasets under <kbd> ./dataset/classification/UEA/</kbd>. The whole UEA datasets can be downloaded from the [official website](https://www.timeseriesclassification.com/index.php/) in <kbd>.ts</kbd> format.
 ## 3.Model
 - Under <kbd>./model/</kbd>, we have provided the proposed model in <kbd>TSCMixer.py</kbd>, as well as the models corresponding to the ablation experiments.
-
 - Under <kbd>./layers/</kbd>, there are some modules used in our model; in addition, we have also provided other commonly used modules for exploration purposes.
-
 - Under <kbd>./exp/</kbd>, we have provided the scripts for the training process.
-
 ## 4.Visualization
 - In <kbd>./utils/tools.py</kbd>, we have provided a heatmap visualization function <kbd>heatmap(hidden_state, save_path)</kbd>.
 # Installation
+- Python 3.10
+- Pytorch 2.1.0
+- CUDA 12.1
+- mamba-ssm 2.2.4
+- causal-conv1d 1.5.0.post8
+- PyWavelets 1.8.0
 
+To install <kbd>mamba-ssm</kbd> and <kbd>causal-conv1d</kbd>, we recommend downloading the <kbd>.whl</kbd> installation packages from [mamba-ssm](https://github.com/state-spaces/mamba/releases/tag/v2.2.4) and [causal-conv1d](https://github.com/Dao-AILab/causal-conv1d/releases/tag/v1.5.0.post8) first, then installing them using <kbd>pip install xxx.whl</kbd> in the terminal.
 # Run
+- To train, we have provided the function  <kbd>exp.train(train_data, val_data, test_data) </kbd> in <kbd>run.py</kbd>. In the training process, the best weights will be save at <kbd>./checkpoints/ckpt_modelname/modelname_dataset_xxx.pth</kbd>. 
+- To inference, we have provided the function <kbd>exp.test(test_data) </kbd> in <kbd>run.py</kbd>. In the inference process, the script will read the config file <kbd>./config/TSCMixer.yaml</kbd> and load the weights from <kbd>./checkpoints/ckpt_modelname/</kbd> according to the configs.
+# Acknowledgement
+We are thankful to [MambaTS](https://arxiv.org/abs/2405.16440), [TimesNet](https://arxiv.org/abs/2210.02186), [Mamba](https://3dvar.com/Gu2023Mamba.pdf), [InceptionTime](https://arxiv.org/abs/1909.04939) for releasing their code as open-source contributions and [UEA](https://www.timeseriesclassification.com/index.php/) for providing open-source datasets. 
